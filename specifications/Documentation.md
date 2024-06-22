@@ -3,7 +3,7 @@
 ## Technical requirements
 
 - Node.js Platform
-- Javascript
+- Typescript
 - Express.js 
 - Postgres DB
 - Clean SQL queries
@@ -18,6 +18,6 @@ Register user with email and password in service with email confirmation.
 
 **User**
 
-Every users with all of their information
+Managing all users with all of their information
 
-[See docs](./User.md)
+[See docs](./UserManagement.md)
