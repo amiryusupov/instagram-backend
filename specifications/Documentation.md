@@ -45,3 +45,11 @@ Managing comments
 Managing followers and followings
 
 [See docs](./Followers.md)
+
+**Stories**
+
+[See docs](./Stories.md)
+
+**Notifications**
+
+[See docs](./Notifications.md)
