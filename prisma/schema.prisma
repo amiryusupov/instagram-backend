@@ -12,3 +12,38 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  phone      String   @unique
+  password   String
+  role       Role     @default(USER)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  profile    Profile?
+}
+
+model Profile {
+  id              Int       @id @default(autoincrement())
+  bio             String?
+  gender          Gender
+  profile_picture String?
+  fullname        String
+  birthday        DateTime
+  username        String    @unique
+  userId          Int       @unique
+  user            User      @relation(fields: [userId], references: [id]) // connection between User and Profile models
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum Role {
+  USER
+  ADMIN
+}
