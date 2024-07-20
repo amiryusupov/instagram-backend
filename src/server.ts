@@ -13,5 +13,5 @@ app.use(express.urlencoded({ extended: true }));
 const port = +process.env.SERVER_PORT!;
 
 app.listen(port, () => {
-  console.log("Server is running");
+  console.log(`Server is running on http://localhost:${port}`);
 });
