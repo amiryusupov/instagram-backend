@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  phone      String   @unique
-  password   String
-  role       Role     @default(USER)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  profile    Profile?
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  phone        String   @unique
+  password     String
+  role         Role     @default(USER)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  is_confirmed Boolean
+  profile      Profile?
 }
 
 model Profile {
