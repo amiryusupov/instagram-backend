@@ -17,8 +17,8 @@ export interface CreateUserDto {
   email: string
   password: string
   phone: string
-  isConfirmed: boolean
-  token: string
+  is_confirmed: boolean
+  token?: string
 }
 
 export interface UpdateUserDto {

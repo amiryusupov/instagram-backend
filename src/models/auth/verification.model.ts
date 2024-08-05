@@ -1,4 +1,4 @@
 export interface CreateVerificationDto {
-  readonly code: string,
+  readonly code: string
   readonly email: string
 }

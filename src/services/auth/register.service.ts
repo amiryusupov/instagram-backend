@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 
 export default class RegisterService{
   async create(user: CreateUserDto) {
-    const token = v4()
+    const randomToken = v4()
     const saltRounds = 10
     const password = user.password
     const isConfirmed: boolean = false
@@ -17,8 +17,8 @@ export default class RegisterService{
         email: user.email,
         password: hashedPassword,
         phone: user.phone,
-        isConfirmed: isConfirmed,
-        token: token
+        is_confirmed: isConfirmed,
+        token: randomToken
       }
     })
   }

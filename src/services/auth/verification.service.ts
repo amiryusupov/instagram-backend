@@ -1,14 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 import { CreateVerificationDto } from "../../models/auth/verification.model";
-import {v4} from "uuid"
+
 const prisma = new PrismaClient()
 
 export default class VerificationService {
   async createVerification(verification: CreateVerificationDto) {
-    const code = v4()
     return await prisma.verification.create({
       data: {
-        code: code,
+        code: verification.code,
         email: verification.email
       }
     })
@@ -20,7 +19,7 @@ export default class VerificationService {
       }
     })
   }
-  async clearVerification(timeOut: number) {
+  async cleanVerification(timeOut: number) {
     const time = new Date().getTime() - timeOut * 1000
     return await prisma.verification.deleteMany({
       where: {
