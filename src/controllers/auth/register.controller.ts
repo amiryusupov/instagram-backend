@@ -5,6 +5,7 @@ import VerificationService from "../../services/auth/verification.service";
 import { verifyCode } from "../../utils/functions";
 import dotenv from "dotenv";
 import { CreateVerificationDto } from "../../models/auth/verification.model";
+import { generateToken } from "../../utils/jwt.utils";
 
 dotenv.config();
 const accountService = new RegisterService()
@@ -25,15 +26,23 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       email: bodyDto.email
     }
     const verification = await verificationService.createVerification(verificationDto)
+    console.log("verification:" + verification)
+    if(verification == null) {
+      return res.status(500).json({
+        message: "Cannot save the verification"
+      })
+    }
     const user = await accountService.create(bodyDto)
-    return res.status(200).json({
+    const token = generateToken({userId: user.id, email: user.email})
+    res.status(200).json({
       message: "Verification code sent",
       email: user.email,
       verificationId: verification.id,
-      timeOut: process.env.TIME_OUT
+      timeOut: process.env.TIME_OUT,
+      token
     })
     const deleteUser = verificationService.cleanVerification(+process.env.TIME_OUT!)
-    console.log("Delete user:" + cleanVerification)
+    console.log("Delete user:" + deleteUser)
   }
   catch {
     next

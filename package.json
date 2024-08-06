@@ -30,7 +30,6 @@
     "prisma": "^5.17.0",
     "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
-    "uuid": "^10.0.0",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
@@ -42,7 +41,6 @@
     "@types/node": "^20.14.11",
     "@types/nodemon": "^1.19.6",
     "@types/pg": "^8.11.6",
-    "@types/typescript": "^2.0.0",
-    "@types/uuid": "^10.0.0"
+    "@types/typescript": "^2.0.0"
   }
 }
