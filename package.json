@@ -26,7 +26,6 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.4",
-    "pg": "^8.12.0",
     "prisma": "^5.17.0",
     "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
@@ -40,7 +39,6 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.11",
     "@types/nodemon": "^1.19.6",
-    "@types/pg": "^8.11.6",
     "@types/typescript": "^2.0.0"
   }
 }

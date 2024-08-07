@@ -3,11 +3,10 @@ import { CreateUserDto } from "../../models/auth/user.model";
 import RegisterService from "../../services/auth/register.service";
 import VerificationService from "../../services/auth/verification.service";
 import { verifyCode } from "../../utils/functions";
-import dotenv from "dotenv";
+import { verificationConfig } from "../../config";
 import { CreateVerificationDto } from "../../models/auth/verification.model";
 import { generateToken } from "../../utils/jwt.utils";
 
-dotenv.config();
 const accountService = new RegisterService()
 const verificationService = new VerificationService()
 
@@ -41,7 +40,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       timeOut: process.env.TIME_OUT,
       token
     })
-    const deleteUser = verificationService.cleanVerification(+process.env.TIME_OUT!)
+    const deleteUser = verificationService.cleanVerification(+verificationConfig.timeOut)
     console.log("Delete user:" + deleteUser)
   }
   catch {
