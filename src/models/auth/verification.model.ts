@@ -1,4 +1,14 @@
+export interface VerificationDto {
+  id: string;
+  code: string;
+  email: string;
+  created_at: Date;
+}
 export interface CreateVerificationDto {
-  readonly code: string
-  readonly email: string
+  code: string,
+  email: string
+}
+export interface ReceiveVerificationDto {
+  code: string;
+  verificationId: string;
 }

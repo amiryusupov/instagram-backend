@@ -51,7 +51,7 @@ enum Role {
 }
 
 model Verification {
-  id         Int @id @default(autoincrement())
+  id         String @unique
   code       String
   email      String
   created_at DateTime @default(now())
