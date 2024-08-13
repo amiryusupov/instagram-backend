@@ -6,6 +6,7 @@ import { verifyCode } from "../../utils/functions";
 import { verificationConfig } from "../../config";
 import { CreateVerificationDto } from "../../models/auth/verification.model";
 import { generateToken } from "../../utils/jwt.utils";
+import { sendEmail } from "../../services/auth/mail.service";
 
 const accountService = new RegisterService();
 const verificationService = new VerificationService();
@@ -34,6 +35,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       });
     }
     const user = await accountService.create(bodyDto);
+    await sendEmail(bodyDto.email, code)
     const token = generateToken({ userId: user.id, email: user.email });
     res.status(200).json({
       message: "Verification code sent",
@@ -47,6 +49,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     );
     console.log("Delete user:" + deleteUser);
   } catch {
-    next;
+    next();
   }
 };
