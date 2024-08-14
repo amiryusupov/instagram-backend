@@ -1,3 +1,5 @@
+import { Role } from "@prisma/client";
+
 export interface VerificationDto {
   id: string;
   code: string;
@@ -11,4 +13,9 @@ export interface CreateVerificationDto {
 export interface ReceiveVerificationDto {
   code: string;
   verificationId: string;
+}
+export interface UpdateAfterVerificationDto{
+  id: number,
+  role: Role,
+  is_confirmed: boolean
 }

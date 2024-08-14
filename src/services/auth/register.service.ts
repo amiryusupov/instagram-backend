@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { CreateUserDto } from "../../models/auth/user.model";
 import bcrypt from "bcrypt";
+import { UpdateAfterVerificationDto } from "../../models/auth/verification.model";
 
 const prisma = new PrismaClient();
 
@@ -33,5 +34,16 @@ export default class RegisterService {
         phone,
       },
     });
+  }
+  async updateUserAfterVerification(user: UpdateAfterVerificationDto) {
+    return await prisma.user.update({
+      where: {
+        id: user.id
+      },
+      data: {
+        role: user.role,
+        is_confirmed: user.is_confirmed
+      }
+    })
   }
 }

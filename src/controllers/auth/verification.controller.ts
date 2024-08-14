@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import VerificationService from "../../services/auth/verification.service";
-import { ReceiveVerificationDto } from "../../models/auth/verification.model";
+import { ReceiveVerificationDto, UpdateAfterVerificationDto } from "../../models/auth/verification.model";
 import RegisterService from "../../services/auth/register.service";
 import { getTimeOut } from "../../utils/functions";
 
@@ -16,8 +16,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         message: "Verification not found"
       })
     }
-    const findUserByEmail = await userService.findUserByEmail(verification.email)
-    if(findUserByEmail == null) {
+    const user = await userService.findUserByEmail(verification.email)
+    if(user == null) {
       return res.status(401).json({
         message: "User not found"
       })
@@ -39,13 +39,27 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         message: "Wrong verification id"
       })
     }
-    if(findUserByEmail.role == "USER") {
+    if(user.role == "USER") {
       return res.status(400).json({
         message: "User already verified"
       })
     }
-    const is_confirmed: Boolean = true
-    
+    const updatedUserDto: UpdateAfterVerificationDto = {
+      id: user.id,
+      role: "USER",
+      is_confirmed: true
+    }
+    const updatedUser = await userService.updateUserAfterVerification(updatedUserDto)
+    res.status(200).json({
+      message: "Successfully verified",
+      user: {
+        id: user.id,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+        role: updatedUser.role
+      },
+      token: updatedUser.token
+    })
   } catch (err) {
     next(err);
   }
