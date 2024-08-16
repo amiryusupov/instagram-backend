@@ -9,8 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", api);
 app.use(errorHandler);
+app.use("/api", api);
 
 app.listen(serverConfig.port, () => {
   console.log(`Server is running on http://localhost:${serverConfig.port}`);
