@@ -7,6 +7,7 @@ import { verificationConfig } from "../../config";
 import { CreateVerificationDto } from "../../models/auth/verification.model";
 import { generateToken } from "../../utils/jwt.utils";
 import { sendEmail } from "../../services/auth/mail.service";
+import RegisterScheme from "../../validation/auth/register.scheme";
 
 const accountService = new RegisterService();
 const verificationService = new VerificationService();
@@ -14,6 +15,12 @@ const verificationService = new VerificationService();
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const code = verifyCode();
+    const {error} = RegisterScheme.validate(req.body, {abortEarly: true})
+    if(error) {
+      return res.status(401).json({
+        error: error.details[0].message
+      })
+    }
     const bodyDto: CreateUserDto = req.body;
     const userByEmail = await accountService.findUserByEmail(bodyDto.email);
     if (userByEmail != null) {

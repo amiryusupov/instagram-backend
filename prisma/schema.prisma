@@ -28,12 +28,13 @@ model User {
 
 model Profile {
   id              Int       @id @default(autoincrement())
+  username        String    @unique
   bio             String?
   gender          Gender
   profile_picture String?
   fullname        String
   birthday        DateTime
-  username        String    @unique
+  is_completed    Boolean
   userId          Int       @unique
   user            User      @relation(fields: [userId], references: [id]) // connection between User and Profile models
 }
