@@ -7,10 +7,9 @@ const prisma = new PrismaClient();
 
 export default class RegisterService {
   async create(user: CreateUserDto) {
-    const saltRounds = 10;
-    const password = user.password;
     const isConfirmed: boolean = false;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const salt = bcrypt.genSaltSync(10)
+    const hashedPassword = bcrypt.hashSync(user.password, salt)
     return await prisma.user.create({
       data: {
         email: user.email,

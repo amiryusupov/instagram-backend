@@ -23,7 +23,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     }
     const verificationDto: CreateVerificationDto = {
       code: code,
-      email: bodyDto.email
+      email: bodyDto.email,
     };
     const verification = await verificationService.createVerification(
       verificationDto
@@ -35,7 +35,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       });
     }
     const user = await accountService.create(bodyDto);
-    await sendEmail(bodyDto.email, code)
+    await sendEmail(bodyDto.email, code);
     const token = generateToken({ userId: user.id, email: user.email });
     res.status(200).json({
       message: "Verification code sent",
