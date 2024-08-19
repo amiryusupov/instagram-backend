@@ -11,7 +11,7 @@ export interface CreateVerificationDto {
   email: string
 }
 export interface ReceiveVerificationDto {
-  code: string;
+  code: number;
   verificationId: string;
 }
 export interface UpdateAfterVerificationDto{
