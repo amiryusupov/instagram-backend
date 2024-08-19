@@ -21,5 +21,5 @@ export const RegisterScheme = Joi.object({
       "string.empty": `Phone number cannot be empty`,
       "any.required": `Phone number is required`,
     })
-    .required
+    .required()
 })
