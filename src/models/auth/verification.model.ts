@@ -6,10 +6,6 @@ export interface VerificationDto {
   email: string;
   created_at: Date;
 }
-export interface CreateVerificationDto {
-  code: string,
-  email: string
-}
 export interface ReceiveVerificationDto {
   code: number;
   verificationId: string;

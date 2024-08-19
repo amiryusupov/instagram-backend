@@ -1,5 +1,5 @@
 export const verifyCode = () => {
-  return Math.floor(100000 + Math.random() * 900000).toString()
+  return Math.floor(100000 + Math.random() * 900000)
 }
 
 export const differentBetweenDates = (start: Date, end: Date) => {

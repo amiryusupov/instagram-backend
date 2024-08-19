@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
   }
 })
 
-export const sendEmail = async (email: string, code: string) => {
+export const sendEmail = async (email: string, code: number) => {
     const mailOptions: Mail.Options = {
       from: `"Amir Yusupov" ${emailConfig.email}`,
       to: email,

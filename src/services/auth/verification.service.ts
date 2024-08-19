@@ -1,16 +1,15 @@
 import { PrismaClient } from "@prisma/client";
-import { CreateVerificationDto } from "../../models/auth/verification.model";
 import { v4 as uuidv4 } from "uuid";
 const prisma = new PrismaClient();
 
 export default class VerificationService {
-  async createVerification(verification: CreateVerificationDto) {
+  async createVerification(code: number, email: string) {
     const verificationId = uuidv4();
     return await prisma.verification.create({
       data: {
         id: verificationId,
-        code: verification.code,
-        email: verification.email,
+        code,
+        email
       },
     });
   }
